@@ -1,0 +1,32 @@
+pipeline{ 
+    agent any
+    
+    tools{
+        maven 'M101'
+    }
+    
+    stages {
+        
+      stage("checkout")  
+      {
+        steps{
+             script{
+                git branch:'main',url:'https://github.com/AnjuMeleth/SpringPetClinic.git'
+               }
+             }
+        }
+        stage ('Compile'){
+            steps {
+                bat 'mvn Compile'
+            }
+        }
+        
+        stages('Test-Compile'){
+            steps {
+                bat 'mvn test'
+            }
+            
+        }
+     }
+     
+}
